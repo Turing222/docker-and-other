@@ -1,0 +1,15 @@
+# Python 忽略项
+__pycache__/
+*.pyc
+venv/
+.venv/
+.mypy_cache/
+.pytest_cache/
+
+# 编辑器/IDE 忽略项
+.vscode/
+
+# Docker 忽略项
+*.o
+*.so
+.DS_Store
