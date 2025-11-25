@@ -22,3 +22,7 @@ Dockerfile
 # 编译的Python文件缓存：即使在 .gitignore 中忽略了，在这里也需要再次忽略
 __pycache__
 *.pyc
+
+# 测试数据
+data/
+src/

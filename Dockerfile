@@ -1,6 +1,6 @@
 # 1. 选择基础镜像 (就像选择操作系统)
 # slim 版本更小，适合生产环境
-FROM python:3.11-slim
+FROM python:3.10-slim
 
 # 2. 设置容器内的工作目录
 WORKDIR /app
@@ -19,4 +19,4 @@ COPY . .
 EXPOSE 8000
 
 # 7. 启动命令：运行 uvicorn 服务器
-CMD ["uvicorn", "fastapi_demo:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
