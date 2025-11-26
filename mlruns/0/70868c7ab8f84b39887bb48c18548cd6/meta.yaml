@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/0/70868c7ab8f84b39887bb48c18548cd6/artifacts
+end_time: 1764170589472
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 70868c7ab8f84b39887bb48c18548cd6
+run_name: popular-snipe-291
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764170585220
+status: 4
+tags: []
+user_id: tongying
