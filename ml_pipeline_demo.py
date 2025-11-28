@@ -15,7 +15,7 @@ print(DB_URI)
 mlflow.set_tracking_uri(DB_URI)
 
 
-
+print("第一次自动化测试")
 # 设置实验名称
 mlflow.set_experiment("CI_CD_Automation_Demo")
 
