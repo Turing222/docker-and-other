@@ -19,7 +19,7 @@ try:
     # 4. 示例查询：获取最近 3 个 Runs 的 UUID 和状态
     print("\n--- 最近 3 个 Runs ---")
     query = """
-    SELECT run_uuid, status, start_time FROM runs ORDER BY start_time DESC LIMIT 3;
+    SELECT * FROM runs ORDER BY start_time DESC LIMIT 3;
     """
     cursor.execute(query)
     

@@ -20,3 +20,4 @@ src/
 
 #mlflow的本地数据存储
 mlruns/
+mlartifacts/
