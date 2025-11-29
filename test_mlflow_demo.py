@@ -4,7 +4,7 @@ import pandas as pd
 
 # 1. 定义服务的 URL
 # 注意：MLflow 标准的预测接口路径是 /invocations
-url = "http://127.0.0.1:5001/invocations"
+url = "http://127.0.0.1:5000/invocations"
 
 # 2. 构造测试数据
 # 我们模拟两条数据，基于 Iris 数据集的 4 个特征

@@ -9,9 +9,9 @@ import os
 
 # 使用 os.path.abspath 确保路径是绝对的
 # 确保所有操作都在同一个 mlruns 文件夹中
-db_path = os.path.abspath(os.path.join(os.getcwd(), "mlruns", "mlflow.db"))
-DB_URI = f"sqlite:///{db_path}"
-mlflow.set_tracking_uri(DB_URI)
+#db_path = os.path.abspath(os.path.join(os.getcwd(), "mlruns", "mlflow.db"))
+#DB_URI = f"sqlite:///{db_path}"
+#mlflow.set_tracking_uri(DB_URI)
 mlflow.set_experiment("mlflow_Demo")
 
 X, y = load_iris(return_X_y=True)
@@ -45,9 +45,9 @@ with mlflow.start_run() as run:
     # 保存模型
     mlflow.sklearn.log_model(
         sk_model=model,
-        name="model"
-        #registered_model_name="RandomForestModel",
-        #input_example=input_example
+        name="model",
+        registered_model_name="RandomForestModel",
+        input_example=input_example
         )
 print("\n--- 训练和日志记录完成！请查看 MLflow UI ---")
 print(f"Run ID: {run_id}")

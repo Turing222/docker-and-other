@@ -1,0 +1,40 @@
+version: '3.10'
+
+services:
+  # 1. 我们的模型服务
+  ml_app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      # 让 MLflow 知道去哪里找数据
+      #- MLFLOW_TRACKING_URI=sqlite:////mlruns/mlflow.db
+      - MLFLOW_TRACKING_URI=file:///mlruns/
+    volumes:
+      # 【关键】把本地的 mlruns 挂载到容器里，这样容器才能读取到模型文件
+      # 假设 mlruns 在 monitor_demo 的上一级目录 (即项目根目录)
+      - ../mlruns:/app/mlruns
+      - ../mlruns/mlflow.db:/app/mlruns/mlflow.db
+    networks:
+      - monitor-net
+
+  # 2. Prometheus (收集数据)
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - monitor-net
+
+  # 3. Grafana (展示数据)
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - monitor-net
+
+networks:
+  monitor-net:
