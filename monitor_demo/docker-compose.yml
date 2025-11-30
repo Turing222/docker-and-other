@@ -6,15 +6,15 @@ services:
     build: .
     ports:
       - "5000:5000"
-    environment:
+    #environment:
       # 让 MLflow 知道去哪里找数据
       #- MLFLOW_TRACKING_URI=sqlite:////mlruns/mlflow.db
-      - MLFLOW_TRACKING_URI=file:///mlruns/
-    volumes:
+      #- MLFLOW_TRACKING_URI=file:///mlruns/
+    #volumes:
       # 【关键】把本地的 mlruns 挂载到容器里，这样容器才能读取到模型文件
       # 假设 mlruns 在 monitor_demo 的上一级目录 (即项目根目录)
-      - ../mlruns:/app/mlruns
-      - ../mlruns/mlflow.db:/app/mlruns/mlflow.db
+      #- ../mlruns:/app/mlruns
+      #- ../mlruns/mlflow.db:/app/mlruns/mlflow.db
     networks:
       - monitor-net
 

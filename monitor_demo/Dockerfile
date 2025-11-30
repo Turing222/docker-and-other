@@ -10,6 +10,6 @@ RUN pip install mlflow fastapi uvicorn prometheus-client pandas scikit-learn
 
 # 复制代码
 COPY app.py .
-
+COPY mlruns /app/mlruns
 # 启动命令
 CMD ["python", "app.py"]

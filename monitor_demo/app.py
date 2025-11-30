@@ -40,7 +40,12 @@ app.mount("/metrics", metrics_app)
 # ⚠️ 注意：为了 Demo 方便，这里我们写死模型路径
 # 在 Docker 中，我们会把本地的 mlruns 挂载进去
 # 假设我们加载 DemoModel 的最新生产版本或特定版本
-MODEL_URI = "models:/RandomForestModel/Latest" # 或者使用本地路径
+#MODEL_URI = "models:/RandomForestModel/Latest" # 或者使用本地路径
+
+#Run ID: 3967c8324f23425eb7abb942376d2c4c
+#MODEL_URI = "/app/mlruns/419493442711422412/models/m-d3e89cdc620242159a62f4007e1c1b59/artifacts"
+MODEL_URI = "file:///E:/study/docker_demo/monitor_demo/mlruns/419493442711422412/models/m-d3e89cdc620242159a62f4007e1c1b59/artifacts"
+
 print(f"正在加载模型: {MODEL_URI} ...")
 model = mlflow.pyfunc.load_model(MODEL_URI)
 print("模型加载成功！")
