@@ -43,8 +43,8 @@ app.mount("/metrics", metrics_app)
 #MODEL_URI = "models:/RandomForestModel/Latest" # 或者使用本地路径
 
 #Run ID: 3967c8324f23425eb7abb942376d2c4c
-#MODEL_URI = "/app/mlruns/419493442711422412/models/m-d3e89cdc620242159a62f4007e1c1b59/artifacts"
-MODEL_URI = "file:///E:/study/docker_demo/monitor_demo/mlruns/419493442711422412/models/m-d3e89cdc620242159a62f4007e1c1b59/artifacts"
+MODEL_URI = "/app/mlruns/419493442711422412/models/m-d3e89cdc620242159a62f4007e1c1b59/artifacts"
+#MODEL_URI = "file:///E:/study/docker_demo/monitor_demo/mlruns/419493442711422412/models/m-d3e89cdc620242159a62f4007e1c1b59/artifacts"
 
 print(f"正在加载模型: {MODEL_URI} ...")
 model = mlflow.pyfunc.load_model(MODEL_URI)
@@ -77,8 +77,9 @@ async def predict(request: Request):
         # 计算耗时并记录
         duration = time.time() - start_time
         REQUEST_LATENCY.observe(duration)
-        
-        return result.tolist()
+
+        return {"predictions": result.tolist()}
+        #return result.tolist() 需要写成返回报文的格式 因为fastapi比较自由
 
     except Exception as e:
         # 记录失败指标
