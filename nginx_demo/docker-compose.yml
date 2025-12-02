@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  # 模拟后端节点 1
+  api_1:
+    build: ./app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    expose:
+      - "8000"
+
+  # 模拟后端节点 2 (为了演示负载均衡)
+  api_2:
+    build: ./app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    expose:
+      - "8000"
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      # 挂载 Certbot 的验证目录和证书目录
+      - ./certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
+    depends_on:
+      - api_1
+      - api_2
+
+  # Certbot 容器：用于申请和更新证书
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
