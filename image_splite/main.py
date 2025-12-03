@@ -8,8 +8,14 @@ import model
 from model import test_data
 from fastapi import FastAPI, UploadFile, File
 import uvicorn
+import mlflow
 
 from preimage import transform_image
+
+# 1. 设定 MLflow 实验 (Tracking)
+# 如果实验不存在，它会被创建
+experiment_name = "Image_Splite_Demo"
+mlflow.set_experiment(experiment_name) 
 
 # 1. 重新实例化一个"空脑子"的模型
 model_new = model.MyFashionModel()

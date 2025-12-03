@@ -29,6 +29,32 @@ services:
       - api_1
       - api_2
 
+  #证书生成服务 (certs-generator)
+
+  certs-generator:
+    # 使用轻量级包含 OpenSSL 的镜像
+    image: alpine/helm:3.14.0 # 任意包含 OpenSSL 的小镜像，如 alpine 或 centos/tools
+    container_name: certs_generator
+    volumes:
+      # ⚠️ 关键：将证书目录挂载到宿主机，以便 Nginx 服务访问
+      - ./nginx_certs:/etc/nginx/certs
+    # 命令：检查证书是否存在，如果不存在则生成
+    command: >
+      sh -c "
+        if [ ! -f /etc/nginx/certs/localhost.crt ]; then
+          echo 'Certificate not found, generating new one...' &&
+          openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+            -keyout /etc/nginx/certs/localhost.key \
+            -out /etc/nginx/certs/localhost.crt \
+            -subj '/C=CN/ST=Shanghai/O=DevOrg/CN=localhost'
+        else
+          echo 'Certificate already exists, skipping generation.'
+        fi
+      "
+    # 确保此服务运行完毕后退出，并且不会重启
+    restart: 'no'
+    # 容器启动时只运行一次
+    profiles: ["generate_certs"] # 使用 profiles，只有明确指定时才运行
   # Certbot 容器：用于申请和更新证书
   certbot:
     image: certbot/certbot
