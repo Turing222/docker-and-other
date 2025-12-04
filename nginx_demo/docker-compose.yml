@@ -28,7 +28,7 @@ services:
     depends_on:
       - api_1
       - api_2
-
+      - certs-generator
   #证书生成服务 (certs-generator)
 
   certs-generator:
