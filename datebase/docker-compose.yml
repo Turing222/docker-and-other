@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  db:
+    image: pgvector/pgvector:pg16  # 使用带有 pgvector 的官方镜像
+    environment:
+      POSTGRES_USER: mlops_user
+      POSTGRES_PASSWORD: mlops_password
+      POSTGRES_DB: mlops_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
