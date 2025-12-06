@@ -30,4 +30,4 @@ jobs:
     # 注意：这里我们演示的是逻辑。
     # 因为没有配置远程服务器，MLflow 会在当前容器内创建临时的 mlruns 和 sqlite 数据库
     - name: Run ML Pipeline (Train -> Evaluate -> Register)
-      run: python ml_pipeline_demo.py
+      run: python ml_pipeline_demo/ml_pipeline_demo.py
